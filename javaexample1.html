@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Beispiel 1</title>
+
+<script type="text/javascript" src="terminAuswahl.js"></script>
+<script type="text/javascript" src="LinkedSelection.js"></script>
+<script type="text/javascript">
+
+/**
+ * Diese Callback-Funktion soll beim Abschliessen der Auswahlstrecke und beim
+ * Ädern der Auswahl in einer der Auswahllisten aufgerufen werden.
+ * @param selected ein Array mit den Daten der jeweiligen Auswahllisten
+ *                 (leer, wenn Strecke nicht abgeschlossen)
+ **/
+function ergebnisZeigen( selected )
+{
+  if( selected.length )
+  {
+    /*
+     * Auswahlstrecke wurde beendet
+     */
+
+    // Visualisierung der Auswahlsrecke
+    var sel = '';
+    var val = '';
+    var txt = '';
+    for( var i = 0; i < selected.length; i++ )
+    {
+      sel += ( i>0 ? ' &rarr; ' : '') + selected[i].id;
+      val += ( i>0 ? ' &rarr; ' : '') + selected[i].value;
+      txt += ( i>0 ? ' &rarr; ' : '') + selected[i].text;
+    }
+    var output = '<h3>Gewäte Strecke:<'+'/h3><h4>IDs der Auswahllisten<'+'/h4><p>' + sel +
+           '<'+'/p><h4>Werte der gewäten Optionen<'+'/h4><p>' + val +
+           '<'+'/p><h4>Texte (Namen) der gewäten Optionen<'+'/h4><p>' + txt + '<'+'/p>';
+  }
+  else
+  {
+    /*
+     * Auswahlstrecke wurde noch nicht beendet
+     */
+
+    // Hinweis zur Auswahl in der nästen Auswahlliste
+    var output = '<p>Wäen Sie eine Option aus der näste Auswahlliste.<'+'/p>';
+  }
+  var ergebnisObj = document.getElementById( 'ergebnis' ).innerHTML = output;
+};
+
+window.onload = function()
+{
+  var vk = new LinkedSelection( [ 'professor', 'lesung', 'termin' ], ergebnisZeigen, terminAuswahl );
+}
+
+</script>
+
+</head>
+<body>
+
+<h1>Beispiel 1</h1>
+
+<p>Bitte waelen Sie in der folgenden Auswahlliste einen Professor</p>
+
+<p>
+<label id="professorLabel" for="professor">Professor:</label>
+<select id="professor">
+  <option value="--">Bitte waelen:</option>
+  <option value="p23">Albers, Alfred</option>
+  <option value="p24">Braun, Berta</option>
+  <option value="p25">Drachenzaun, Doris</option>
+  <option value="p26">Mmathis Stephan</option>
+  <option value="p27">Meier, Manfred</option>
+</select>
+
+<label id="lesungLabel" for="lesung">Lesung:</label>
+<select id="lesung">
+  <option value="--">------</option>
+</select>
+
+<label id="lesungTermin" for="termin">Termin:</label>
+<select id="termin">
+  <option value="--">------</option>
+</select>
+</p>
+
+<div id="ergebnis"></div>
+
+</body>
+</html>

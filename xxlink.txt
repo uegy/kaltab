@@ -1,0 +1,10 @@
+https://github.com/eigenmannmartin/hs1314-phpmysql/blob/master/V5/todo/index.php
+
++------+-----------------------+--------------------------------------+-------+---------+-------+-------+------+-----+
+| Type | Typetxt               | Lebensmittel                         | Kal   | Eiweiss | Fett  | KH    | BE   | ID  |
++------+-----------------------+--------------------------------------+-------+---------+-------+-------+------+-----+
+//Find hoechste Type Zahl (anzahl Typen)
+select Type from kaltab order by Type desc LIMIT 0,1;
+
+//Finde den Typetxt zu Type 
+select Typetxt from kaltab where Type=1 LIMIT 1;

@@ -1,0 +1,53 @@
+<script language="JavaScript" type="text/javascript">
+<!--
+var products4Product1 = { 
+"cars" : "audi,bmw,opel" , 
+"hardware" : "monitor,harddisc,graphics" , 
+"kids" : "ben,bibi,laura" 
+};
+
+var productsText2 = {
+"audi" : "Audi",
+"bmw" : "BMW",
+"opel" : "Opel",
+"monitor" : "Monitor",
+"harddisc" : "Festplatte",
+"graphics" : "Grafikkarte",
+"ben" : "Benjamin Blü",
+"bibi" : "Bibi Blocksberg",
+"laura" : "Lauras Stern"
+}
+
+var oProduct1,oProduct2;
+
+function initPage()
+{
+    oProduct1 = document.getElementById( "myProduct1" );
+    oProduct2 = document.getElementById( "myProduct2" ) ;
+    for (var i in products4Product1) 
+    	products4Product1[ i ] = products4Product1[ i ].split( "," );
+        
+    createOptions( oProduct2 , oProduct1.value );
+};
+
+function createOptions( oSelect , value )
+{
+    oSelect.options.length = 0;
+    for (var i = 0;i < products4Product1[ value ].length; i++ )
+    {
+    var code = products4Product1[ value ][ i ];
+    oSelect.options[ i ] = new Option( productsText2[ code ], code )
+    }
+}
+//-->
+</script>
+<body onload="initPage()">
+<select id="myProduct1" onchange="createOptions(oProduct2,this.value)">
+<option value="cars">Autos</option>
+<option value="hardware">Computer</option>
+<option value="kids">Kinder</option>
+</select>
+<select id="myProduct2" ><option></option></select>
+<br><br><br>
+
+</body> 
